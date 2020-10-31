@@ -17,8 +17,8 @@ class Operating_organizations(models.Model):
         return self.name
 
 class Shelter(models.Model):
-    name = models.CharField("Оф. Краткое наименование приюта", max_length=255)
-    prefecture = models.ForeignKey(Prefecture, on_delete=models.CASCADE)
+    name = models.CharField("Оф. Краткое наименование приюта", max_length=255, null=True)
+    prefecture = models.ForeignKey(Prefecture, on_delete=models.CASCADE, null=True)
     address = models.CharField("Адрес приюта", max_length=255)
     phone = models.CharField("Телефон приюта", max_length=255, null=True)
 
