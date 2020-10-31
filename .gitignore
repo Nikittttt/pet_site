@@ -3,3 +3,6 @@
 
 # Python
 *.pyc
+
+# Ignore Django migrations
+web/test/migrations/*
