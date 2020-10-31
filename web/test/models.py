@@ -7,8 +7,14 @@ from django.utils import timezone
 class Prefecture(models.Model):
     name = models.CharField("Оф. Краткое наименование префектуры", max_length=255)
 
+    def __str__(self):
+        return self.name
+
 class Operating_organizations(models.Model):
     name = models.CharField("Эксплуатирующие организации", max_length=255)
+
+    def __str__(self):
+        return self.name
 
 class Shelter(models.Model):
     name = models.CharField("Оф. Краткое наименование приюта", max_length=255)
@@ -16,41 +22,93 @@ class Shelter(models.Model):
     address = models.CharField("Адрес приюта", max_length=255)
     phone = models.CharField("Телефон приюта", max_length=255, null=True)
 
+    def __str__(self):
+        return self.name
+
+
 class Reason_retirement(models.Model):
     reason_retirement = models.CharField("причина выбытия", max_length=255)
+
+    def __str__(self):
+        return self.reason_retirement
+
 
 class Reason_death(models.Model):
     reason_death = models.CharField("причина смерти", max_length=255)
 
+    def __str__(self):
+        return self.reason_death
+
+
 class Reason_euthanasia(models.Model):
     reason_euthanasia = models.CharField("причина эвтаназии", max_length=255)
+
+    def __str__(self):
+        return self.reason_euthanasia
+
 
 class District(models.Model):
     district = models.CharField("административный округ", max_length=255)
 
+    def __str__(self):
+        return self.district
+
+
 class Size(models.Model):
     size = models.CharField("размер", max_length=255)
+
+    def __str__(self):
+        return self.size
+
 
 class Tail(models.Model):
     tail = models.CharField("хвост", max_length=255)
 
+    def __str__(self):
+        return self.tail
+
+
 class Ears(models.Model):
     ears = models.CharField("уши", max_length=255)
+
+    def __str__(self):
+        return self.ears
+
 
 class Wool(models.Model):
     wool = models.CharField("шерсть", max_length=255)
 
+    def __str__(self):
+        return self.wool
+
+
 class Color(models.Model):
     color = models.CharField("окрас", max_length=255)
+
+    def __str__(self):
+        return self.color
+
 
 class Breed(models.Model):
     breed = models.CharField("порода", max_length=255)
 
+    def __str__(self):
+        return self.breed
+
+
 class Sex(models.Model):
     sex = models.CharField("пол", max_length=255)
 
+    def __str__(self):
+        return self.sex
+
+
 class Kind(models.Model):
     kind = models.CharField("вид", max_length=255)
+
+    def __str__(self):
+        return self.kind
+
 
 class Pet(models.Model):
     # общие  сведения
@@ -97,6 +155,9 @@ class Pet(models.Model):
     name_leader_shelter = models.CharField("ф.и.о. руководителя приюта", max_length=255)
     name_care_worker = models.CharField("ф.и.о. сотрудника по уходу за животным", max_length=255)
 
+    def __str__(self):
+        return self.name
+
 
 class Processing_parasites(models.Model):
     no = models.IntegerField("№ п/п")
@@ -105,6 +166,10 @@ class Processing_parasites(models.Model):
     dose = models.CharField("доза", max_length=255)
     pet = models.ForeignKey(Pet, on_delete=models.CASCADE)
 
+    def __str__(self):
+        return self.drug_name+self.dose
+
+
 class Vaccination_information(models.Model):
     no = models.IntegerField("№ п/п")
     date = models.DateField("дата")
@@ -112,7 +177,14 @@ class Vaccination_information(models.Model):
     series = models.CharField("№ серии", max_length=255)
     pet = models.ForeignKey(Pet, on_delete=models.CASCADE)
 
+    def __str__(self):
+        return self.type_vaccine+self.series
+
+
 class Health_information(models.Model):
     date = models.DateField("дата")
     anamnesis = models.CharField("анамнез", max_length=255)
     pet = models.ForeignKey(Pet, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.anamnesis
