@@ -11,8 +11,8 @@ class Operating_organizations(models.Model):
     name = models.CharField("Эксплуатирующие организации", max_length=255)
 
 class Shelter(models.Model):
-    name = models.CharField("Оф. Краткое наименование приюта", max_length=255)
-    prefecture = models.ForeignKey(Prefecture, on_delete=models.CASCADE)
+    name = models.CharField("Оф. Краткое наименование приюта", max_length=255, null=True)
+    prefecture = models.ForeignKey(Prefecture, on_delete=models.CASCADE, null=True)
     address = models.CharField("Адрес приюта", max_length=255)
     phone = models.CharField("Телефон приюта", max_length=255, null=True)
 
@@ -56,8 +56,8 @@ class Pet(models.Model):
     # общие  сведения
     ids = models.CharField("карточка учета животного №", max_length=255)
     kind = models.ForeignKey(Kind, on_delete=models.CASCADE)
-    age = models.IntegerField("возраст, год")
-    weight = models.IntegerField("вес, кг")
+    age = models.CharField("возраст, год", max_length=255)
+    weight = models.FloatField("вес, кг")
     name = models.CharField("кличка", max_length=255)
     sex = models.ForeignKey(Sex, on_delete=models.CASCADE)
     breed = models.ForeignKey(Breed, on_delete=models.CASCADE)
@@ -75,7 +75,7 @@ class Pet(models.Model):
     socialized = models.BooleanField("Социализировано (да/нет)", default=False)
     # сведения об отлове
     work_order = models.CharField("заказ-наряд / акт о поступлении животного №", max_length=255, null=True)
-    work_order_date = models.DateField("заказ-наряд дата/ акт о поступлении животного, дата", null=True)
+    work_order_date = models.CharField("заказ-наряд дата/ акт о поступлении животного, дата",max_length=255, null=True)
     district = models.ForeignKey(District, on_delete=models.CASCADE, null=True)
     catch_report = models.CharField("акт отлова №", max_length=255, null=True)
     catching_address = models.CharField("адрес места отлова", max_length=255, null=True)
@@ -100,19 +100,19 @@ class Pet(models.Model):
 
 class Processing_parasites(models.Model):
     no = models.IntegerField("№ п/п")
-    date = models.DateField("дата")
+    date = models.CharField("дата", max_length=255)
     drug_name = models.CharField("название препарата", max_length=255)
     dose = models.CharField("доза", max_length=255)
     pet = models.ForeignKey(Pet, on_delete=models.CASCADE)
 
 class Vaccination_information(models.Model):
     no = models.IntegerField("№ п/п")
-    date = models.DateField("дата")
+    date = models.CharField("дата", max_length=255)
     type_vaccine = models.CharField("вид вакцины", max_length=255)
     series = models.CharField("№ серии", max_length=255)
     pet = models.ForeignKey(Pet, on_delete=models.CASCADE)
 
 class Health_information(models.Model):
-    date = models.DateField("дата")
+    date = models.CharField("дата", max_length=255)
     anamnesis = models.CharField("анамнез", max_length=255)
     pet = models.ForeignKey(Pet, on_delete=models.CASCADE)
